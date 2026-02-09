@@ -4,7 +4,7 @@ This is a VST3/AU waveshaper plugin made with [JUCE](https://juce.com/). The sol
 
 Shoutout to [THM Studio](https://thmstudio.com/blog/how-i-made-a-guitar-amp-plugin/) for his blog post; I am mostly copying his work.
 
-[![PEWaveshaper](https://github.com/gmoican/ParametricEnvelopeWaveshaper/actions/workflows/build.yml/badge.svg)](https://github.com/gmoican/ParametricEnvelopeWaveshaper/actions/workflows/build.yml)
+[![PEWaveshaper](https://github.com/gmoican/PEWaveshaper/actions/workflows/build.yml/badge.svg)](https://github.com/gmoican/PEWaveshaper/actions/workflows/build.yml)
 
 ![DemoImage](docs/demo.png)
 
