@@ -197,6 +197,7 @@ void EnvelParamWaveshaperProcessor::prepareToPlay (double sampleRate, int sample
     spec.sampleRate = sampleRate;
 
     ef.prepare(spec);
+    ef.setPeakDetection(false);
     
     updateParameters();
 }
