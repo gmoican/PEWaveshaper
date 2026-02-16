@@ -1,10 +1,9 @@
 # PEWaveshaper
+[![PEWaveshaper](https://github.com/gmoican/PEWaveshaper/actions/workflows/build.yml/badge.svg)](https://github.com/gmoican/PEWaveshaper/actions/workflows/build.yml)
 
 This is a VST3/AU waveshaper plugin made with [JUCE](https://juce.com/). The sole purpose of this plugin is to showcase and test the performance of my `ParametricWaveshaper` in conjunction with my `EnvelopeFollower` classes in [punk_dsp](https://github.com/gmoican/punk_dsp).
 
 Shoutout to [THM Studio](https://thmstudio.com/blog/how-i-made-a-guitar-amp-plugin/) for his blog post; I am mostly copying his work.
-
-[![PEWaveshaper](https://github.com/gmoican/PEWaveshaper/actions/workflows/build.yml/badge.svg)](https://github.com/gmoican/PEWaveshaper/actions/workflows/build.yml)
 
 ![DemoImage](docs/demo.png)
 
@@ -24,8 +23,8 @@ Check out the following picture to see the visual representation of how the `par
     - `outGain`: Output gain, intended to be used for compensating the volume difference.
     - `attack`: Adjust the attack time for the envelope follower.
     - `release`: Adjust the release time for the envelope follower.
-    - `posLimit`: Experimental...
-    - `negLimit`: Experimental...
+    - `envelope_add`: Addition applied to the envelope value.
+    - `envelope_mul`: Multiplier applied to the envelope value (after the addition).
     - `biasPre`: Bias introduced before applying `drive`, modifies the DC offset for asymmetric shaping.
     - `biasPost`: Bias introduced after applying `drive`, modifies the DC offset for asymmetric shaping.
     - `mix`: Blends the unprocessed and processed signals together.

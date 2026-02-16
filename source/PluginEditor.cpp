@@ -64,24 +64,24 @@ PluginEditor::PluginEditor (EnvelParamWaveshaperProcessor& p)
     biasPostAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(processorRef.apvts, Parameters::postBiasId, biasPostSlider);
     
     // Param Positive Limit
-    paramPosSlider.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
-    paramPosSlider.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
-    paramPosSlider.setRange(Parameters::paramPosMin, Parameters::paramPosMax, 0.1);
-    paramPosSlider.setValue(Parameters::paramPosDefault);
-    paramPosSlider.setName(u8"+α");
-    addAndMakeVisible(paramPosSlider);
+    envelAddSlider.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
+    envelAddSlider.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
+    envelAddSlider.setRange(Parameters::envelAddMin, Parameters::envelAddMax, 0.1);
+    envelAddSlider.setValue(Parameters::envelAddDefault);
+    envelAddSlider.setName(u8"+ε");
+    addAndMakeVisible(envelAddSlider);
     
-    paramPosAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(processorRef.apvts, Parameters::paramPosId, paramPosSlider);
+    envelAddAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(processorRef.apvts, Parameters::envelAddId, envelAddSlider);
     
     // Param Negative Limit
-    paramNegSlider.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
-    paramNegSlider.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
-    paramNegSlider.setRange(Parameters::paramNegMin, Parameters::paramNegMax, 0.1);
-    paramNegSlider.setValue(Parameters::paramNegDefault);
-    paramNegSlider.setName(u8"-α");
-    addAndMakeVisible(paramNegSlider);
+    envelMulSlider.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
+    envelMulSlider.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
+    envelMulSlider.setRange(Parameters::envelMulMin, Parameters::envelMulMax, 0.1);
+    envelMulSlider.setValue(Parameters::envelMulDefault);
+    envelMulSlider.setName(u8"*ε");
+    addAndMakeVisible(envelMulSlider);
     
-    paramNegAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(processorRef.apvts, Parameters::paramNegId, paramNegSlider);
+    envelMulAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(processorRef.apvts, Parameters::envelMulId, envelMulSlider);
 
     // Attack Time (ms)
     attackSlider.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
@@ -160,7 +160,7 @@ void PluginEditor::resized()
     fb.items.add(juce::FlexItem(outGainSlider).withMinWidth(punk_dsp::UIConstants::knobSize)
                                               .withMinHeight(punk_dsp::UIConstants::knobSize)
                                               .withMargin(punk_dsp::UIConstants::margin));
-    fb.items.add(juce::FlexItem(paramPosSlider).withMinWidth(punk_dsp::UIConstants::knobSize)
+    fb.items.add(juce::FlexItem(envelAddSlider).withMinWidth(punk_dsp::UIConstants::knobSize)
                                                .withMinHeight(punk_dsp::UIConstants::knobSize)
                                                .withMargin(punk_dsp::UIConstants::margin));
 
@@ -170,7 +170,7 @@ void PluginEditor::resized()
     fb.items.add(juce::FlexItem(biasPostSlider).withMinWidth(punk_dsp::UIConstants::knobSize)
                                                .withMinHeight(punk_dsp::UIConstants::knobSize)
                                                .withMargin(punk_dsp::UIConstants::margin));
-    fb.items.add(juce::FlexItem(paramNegSlider).withMinWidth(punk_dsp::UIConstants::knobSize)
+    fb.items.add(juce::FlexItem(envelMulSlider).withMinWidth(punk_dsp::UIConstants::knobSize)
                                                .withMinHeight(punk_dsp::UIConstants::knobSize)
                                                .withMargin(punk_dsp::UIConstants::margin));
     

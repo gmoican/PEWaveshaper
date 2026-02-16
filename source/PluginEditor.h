@@ -25,10 +25,10 @@ private:
     juce::TextButton header, params;
     
     // Sliders - Rotary knobs
-    juce::Slider driveSlider, outGainSlider, biasPreSlider, biasPostSlider, paramPosSlider, paramNegSlider, attackSlider, releaseSlider, mixSlider;
+    juce::Slider driveSlider, outGainSlider, biasPreSlider, biasPostSlider, envelAddSlider, envelMulSlider, attackSlider, releaseSlider, mixSlider;
     
     // Attachments for linking sliders-parameters
-    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> driveAttachment, outGainAttachment, biasPreAttachment, biasPostAttachment, paramPosAttachment, paramNegAttachment, attackAttachment, releaseAttachment, mixAttachment;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> driveAttachment, outGainAttachment, biasPreAttachment, biasPostAttachment, envelAddAttachment, envelMulAttachment, attackAttachment, releaseAttachment, mixAttachment;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PluginEditor)
 };

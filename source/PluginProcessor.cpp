@@ -144,18 +144,18 @@ juce::AudioProcessorValueTreeState::ParameterLayout EnvelParamWaveshaperProcesso
     
     // Parameter limits
     layout.add(std::make_unique<juce::AudioParameterFloat>(
-                                                           Parameters::paramPosId,
-                                                           Parameters::paramPosName,
-                                                           juce::NormalisableRange<float>(Parameters::paramPosMin, Parameters::paramPosMax, 0.01f),
-                                                           Parameters::paramPosDefault
+                                                           Parameters::envelAddId,
+                                                           Parameters::envelAddName,
+                                                           juce::NormalisableRange<float>(Parameters::envelAddMin, Parameters::envelAddMax, 0.01f),
+                                                           Parameters::envelAddDefault
                                                            )
                );
     
     layout.add(std::make_unique<juce::AudioParameterFloat>(
-                                                           Parameters::paramNegId,
-                                                           Parameters::paramNegName,
-                                                           juce::NormalisableRange<float>(Parameters::paramNegMin, Parameters::paramNegMax, 0.01f),
-                                                           Parameters::paramNegDefault
+                                                           Parameters::envelMulId,
+                                                           Parameters::envelMulName,
+                                                           juce::NormalisableRange<float>(Parameters::envelMulMin, Parameters::envelMulMax, 0.01f),
+                                                           Parameters::envelMulDefault
                                                            )
                );
     
@@ -183,8 +183,8 @@ void EnvelParamWaveshaperProcessor::updateParameters()
     ws.setBiasPre( apvts.getRawParameterValue(Parameters::preBiasId)->load() );
     ws.setBiasPost( apvts.getRawParameterValue(Parameters::postBiasId)->load() );
     
-    posLimit = apvts.getRawParameterValue(Parameters::paramPosId)->load();
-    negLimit = apvts.getRawParameterValue(Parameters::paramNegId)->load();
+    envelope_adder = apvts.getRawParameterValue(Parameters::envelAddId)->load();
+    envelope_multiplier = apvts.getRawParameterValue(Parameters::envelMulId)->load();
     
     ws.setMix( apvts.getRawParameterValue(Parameters::mixId)->load() );
 }
@@ -197,7 +197,6 @@ void EnvelParamWaveshaperProcessor::prepareToPlay (double sampleRate, int sample
     spec.sampleRate = sampleRate;
 
     ef.prepare(spec);
-    ef.setPeakDetection(false);
     
     updateParameters();
 }
@@ -252,9 +251,8 @@ void EnvelParamWaveshaperProcessor::processBlock (juce::AudioBuffer<float>& buff
         float* channelData = buffer.getWritePointer(ch);
         for (int sample = 0; sample < buffer.getNumSamples(); ++sample)
         {
-            ws.setParam( ef.updateAndReturnEnvelope(channelData[sample]) );
-            // ws.setParam( channelData[sample] );
-            // ws.setParam( juce::jmap(ef.getEnvelope(), negLimit, posLimit) );
+            float envelope = envelope_multiplier * ( ef.process(channelData[sample]) + envelope_adder );
+            ws.setParam(envelope);
             channelData[sample] = ws.processSample(channelData[sample]);
         }
     }

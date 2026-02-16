@@ -33,28 +33,28 @@ namespace Parameters
     constexpr auto biasMax = 1.0f;
 
     // Param limits
-    constexpr auto paramNegId = "paramNeg";
-    constexpr auto paramNegName = "ParamNeg";
-    constexpr auto paramNegDefault = -1.f;
-    constexpr auto paramNegMin = -2.0f;
-    constexpr auto paramNegMax = 0.0f;
+    constexpr auto envelAddId = "envel_add";
+    constexpr auto envelAddName = "EnvelAdd";
+    constexpr auto envelAddDefault = 0.2f;
+    constexpr auto envelAddMin = 0.0f;
+    constexpr auto envelAddMax = 1.0f;
 
-    constexpr auto paramPosId = "paramPos";
-    constexpr auto paramPosName = "ParamPos";
-    constexpr auto paramPosDefault = 1.f;
-    constexpr auto paramPosMin = 0.0f;
-    constexpr auto paramPosMax = 2.0f;
+    constexpr auto envelMulId = "envel_mul";
+    constexpr auto envelMulName = "EnvelMul";
+    constexpr auto envelMulDefault = 1.f;
+    constexpr auto envelMulMin = 0.0f;
+    constexpr auto envelMulMax = 2.0f;
 
     // Time variables
     constexpr auto attackId = "attack";
     constexpr auto attackName = "Attack";
-    constexpr auto attackDefault = 10.f;
+    constexpr auto attackDefault = 0.8f;
     constexpr auto attackMin = 0.1f;
     constexpr auto attackMax = 300.0f;
 
     constexpr auto releaseId = "release";
     constexpr auto releaseName = "Release";
-    constexpr auto releaseDefault = 30.f;
+    constexpr auto releaseDefault = 50.f;
     constexpr auto releaseMin = 1.0f;
     constexpr auto releaseMax = 300.0f;
 
@@ -110,9 +110,8 @@ private:
     punk_dsp::ParametricWaveshaper ws;
     punk_dsp::EnvelopeFollower ef;
 
-    // TODO: Is this necessary ?? -> Delete??
-    float posLimit = Parameters::paramPosDefault;
-    float negLimit = Parameters::paramNegDefault;
+    float envelope_multiplier   { 1.5f };
+    float envelope_adder        { 0.0f };
     
     // =============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (EnvelParamWaveshaperProcessor)
